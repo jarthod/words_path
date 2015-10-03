@@ -14,8 +14,10 @@ words = Set.new(File.read_lines("/usr/share/dict/words").map(&.chomp).select {|w
 $siblings = Hash(String, Array(String)).new do |h, k|
   h[k] = [] of String
   k.size.times do |i|
+    ptr = Pointer.malloc(k.size) { |i| k[i].ord.to_u8 }
     ('a'..'z').each do |l|
-      w = k[0...i] + l + k[(i+1)..-1]
+      ptr[i] = l.ord.to_u8
+      w = String.new(ptr, k.size)
       h[k] << w if w != k && words.includes?(w)
     end
   end

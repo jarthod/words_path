@@ -19,14 +19,14 @@ set<string> load_dict(const char *path, const int length)
   file.open(path);
   while (file >> word) {
     if (word.length() == length) {
-      std::transform(word.begin(), word.end(), word.begin(), ::tolower);
+      transform(word.begin(), word.end(), word.begin(), ::tolower);
       words.insert(word);
     }
   }
   return words;
 }
 
-vector<string> get_siblings(const string& from, const set<string> &words)
+vector<string> get_siblings(const string &from, const set<string> &words)
 {
   vector<string> siblings;
 
@@ -34,7 +34,7 @@ vector<string> get_siblings(const string& from, const set<string> &words)
     string alter = from;
     for (char c = 'a'; c <= 'z'; c++) {
       alter[i] = c;
-      if (alter != from && words.find(alter) != words.end()) {
+      if (c != from[i] && words.count(alter) >= 1) {
         siblings.push_back(alter);
       }
     }
@@ -64,7 +64,7 @@ vector<string> bfs(const string &from, const string &to, const set<string> &word
   }
 
   vector<string> path;
-  string  position = to;
+  string position = to;
   path.push_back(position);
   while (parent.count(position) > 0) {
     path.insert(path.begin(), parent[position]);
@@ -82,8 +82,13 @@ int main(int ac, char **av)
   string from = av[1];
   string to = av[2];
   set<string> words = load_dict("/usr/share/dict/words", from.length());
-  cout << words.size() << endl;
   vector<string> path = bfs(from, to, words);
-  std::copy(path.begin(), path.end(), std::ostream_iterator<string>(std::cout, " -> "));
+  for(int i = 0; i < path.size(); i++) {
+    if (i > 0) {
+      cout << " -> ";
+    }
+    cout << path[i];
+  }
+  cout << endl;
   return 0;
 }

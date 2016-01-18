@@ -13,18 +13,21 @@ end
 
 IO.puts get_siblings.(from, words)
 
-get_path = fn(from, to, words, visited) ->
-  v = from ++ visited
-  x = Enum.filter(get_siblings(from, words), fn(n) ->
-    !Enum.member?(visited, n)
-  end)
-  [next | path] = get_path(x, to, words, v)
-
-
-
+get_path = fn(froms, to, words, visited) ->
+  v = froms ++ visited
+  siblings = for from <- froms do
+    {from, Enum.filter(get_siblings.(from, words), fn(n) ->
+      !Enum.member?(visited, n)
+    end)}
+  end
+  edge = for {from, sibling} <- siblings do sibling end
+  IO.inspect edge
+  # [next | path] = get_path.(edge, to, words, v)
 end
 
 bfs = fn(from, to, words) ->
+
+  get_path.([from], to, words, [])
 #   dist = {from => 0}
 #   parent = {}
 #   queue = [from]

@@ -3,3 +3,4 @@ words_path_crystal
 words_path_rs
 words_path
 .crystal
+Elixir.*.beam

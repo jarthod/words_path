@@ -18,16 +18,14 @@ defmodule WordsPath do
       origins = Map.new(for from <- froms, n <- get_siblings(from, words), !Set.member?(visited, n) do
         {n, from}
       end)
-      edge = Map.keys(origins) |> Enum.into(HashSet.new)
+    edge = Map.keys(origins) |> Enum.into(HashSet.new)
       [next | path] = get_path(edge, to, words, v)
       [origins[next] | [next | path]]
     end
   end
 
   def bfs from, to do
-    IO.puts "loading"
     words = WordsPath.get_words from
-    IO.puts "processing"
     get_path(Enum.into([from], HashSet.new), to, words, HashSet.new)
   end
 

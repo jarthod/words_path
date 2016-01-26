@@ -24,7 +24,7 @@ $siblings = Hash(String, Array(String)).new do |h, k|
   h[k]
 end
 
-def bfs from, to
+def bfs(from, to)
   dist = {from => 0}
   parent = {} of String => String
   queue = [from]

@@ -4,7 +4,7 @@ Words path in a simple programming excercise consisting in writing a program abl
 
 Ex: `cat -> cot -> dot -> dog`
 
-This repository holds a few versions of my solution to this problem I wrote in Ruby, Crystal, C++ and Rust.
+This repository holds a few versions of my solution to this problem I wrote in different languages (see below).
 
 You can compile and run them all by using: `make test`
 You'll need the `crystal`, `clang`, `rustc`, `elixirc` compilers and `ruby`.
@@ -18,3 +18,4 @@ Crystal  | 54 ms    | 40 ms      | Crystal is a Ruby-like statically compiled la
 C++      | 39 ms    | 39 ms      | The C++ version is very fast and stable, as expected from a statically compiled language.
 Rust     | 23 ms    | 23 ms      | Even better then C++, not sure why yet, maybe the file read.
 Elixir   | 730 ms   | 750 ms     | My code is probably pretty bad but that doesn't look good
+mruby    | 2.2 s    | 2.15 s     | Even compiled into binary, mruby is quite slow here

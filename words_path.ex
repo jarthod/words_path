@@ -1,7 +1,8 @@
 defmodule WordsPath do
 
   def get_words from do
-    File.stream!("/usr/share/dict/words") |> Stream.filter(fn(word) -> String.length(word) == length(from)+1 end) |> Stream.map(fn(word) -> word |> String.rstrip(?\n) |> String.downcase |> String.to_char_list end) |> Enum.into(HashSet.new)
+    size = length(from)+1
+    File.stream!("/usr/share/dict/words") |> Stream.filter(fn(word) -> byte_size(word) == size end) |> Stream.map(fn(word) -> word |> String.rstrip(?\n) |> String.downcase |> String.to_char_list end) |> Enum.into(HashSet.new)
   end
 
   def get_siblings from, words do

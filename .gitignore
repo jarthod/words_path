@@ -3,6 +3,7 @@ words_path_crystal
 words_path_rs
 words_path
 words_path_mrb
+words_path_go
 .crystal
 Elixir.*.beam
 mruby-*

@@ -13,9 +13,10 @@ This runs all version against the same example (`jina pray`) to compare their sp
 
 Language | CPU time | Clock time | Comment
 ---------|----------|------------|-------------------------------------------
-Ruby     | 160 ms   | 180 ms     | The difference between CPU time and Clock is caused by ruby VM file loading (IO)
-Crystal  | 54 ms    | 40 ms      | Crystal is a Ruby-like statically compiled language.
-C++      | 39 ms    | 39 ms      | The C++ version is very fast and stable, as expected from a statically compiled language.
 Rust     | 23 ms    | 23 ms      | Even better then C++, not sure why yet, maybe the file read.
+C++      | 39 ms    | 39 ms      | The C++ version is very fast and stable, as expected from a statically compiled language.
+Go       | 40 ms    | 38 ms      |
+Crystal  | 54 ms    | 40 ms      | Crystal is a Ruby-like statically compiled language.
+Ruby     | 160 ms   | 180 ms     | The difference between CPU time and Clock is caused by ruby VM file loading (IO)
 Elixir   | 730 ms   | 750 ms     | My code is probably pretty bad but that doesn't look good
 mruby    | 2.2 s    | 2.15 s     | Even compiled into binary, mruby is quite slow here

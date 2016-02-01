@@ -19,7 +19,7 @@ fn load_dict(path : &str, length : usize) -> HashSet<String> {
   words
 }
 
-fn get_siblings(from : &String, words : &HashSet<String>) -> Vec<String> {
+fn get_siblings(from : &String, words : &mut HashSet<String>) -> Vec<String> {
   let mut siblings = Vec::new();
 
   for i in 0..from.len() {
@@ -27,7 +27,7 @@ fn get_siblings(from : &String, words : &HashSet<String>) -> Vec<String> {
       let mut alter : Vec<u8> = from.bytes().collect();
       alter[i] = c;
       let w = String::from_utf8(alter).unwrap();
-      if c != from.as_bytes()[i] && words.contains(&w) {
+      if words.remove(&w) {
         siblings.push(w);
       }
     }
@@ -35,23 +35,17 @@ fn get_siblings(from : &String, words : &HashSet<String>) -> Vec<String> {
   siblings
 }
 
-fn bfs(from : &String, to : &String, words : &HashSet<String>) -> Vec<String> {
-  let mut dist = HashMap::new();
+fn bfs(from : &String, to : &String, words : &mut HashSet<String>) -> Vec<String> {
   let mut parent = HashMap::new();
   let mut queue = VecDeque::new();
-  dist.insert(from.clone(), 0);
   queue.push_back(from.clone());
 
-  while queue.len() > 0 && !dist.contains_key(to) {
+  while queue.len() > 0 && !parent.contains_key(to) {
     let node = queue.pop_front().unwrap();
     let siblings = get_siblings(&node, words);
     for sibling in siblings {
-      if !dist.contains_key(&sibling) {
-        let new_dist = dist[&node] + 1;
-        dist.insert(sibling.clone(), new_dist);
-        parent.insert(sibling.clone(), node.clone());
-        queue.push_back(sibling.clone());
-      }
+      parent.insert(sibling.clone(), node.clone());
+      queue.push_back(sibling.clone());
     }
   }
 
@@ -70,8 +64,8 @@ fn bfs(from : &String, to : &String, words : &HashSet<String>) -> Vec<String> {
 fn main() {
   let from = env::args().nth(1).expect("Missing from argument");
   let to = env::args().nth(2).expect("Missing to argument");
-  let words = load_dict("/usr/share/dict/words", from.len());
+  let mut words = load_dict("/usr/share/dict/words", from.len());
   println!("{:?} -> {:?}", from, to);
-  let path = bfs(&from, &to, &words);
+  let path = bfs(&from, &to, &mut words);
   println!("{}", path.join(" -> "));
 }

@@ -26,7 +26,7 @@ set<string> load_dict(const char *path, const int length)
   return words;
 }
 
-vector<string> get_siblings(const string &from, const set<string> &words)
+vector<string> get_siblings(const string &from, set<string> &words)
 {
   vector<string> siblings;
 
@@ -34,7 +34,7 @@ vector<string> get_siblings(const string &from, const set<string> &words)
     string alter = from;
     for (char c = 'a'; c <= 'z'; c++) {
       alter[i] = c;
-      if (c != from[i] && words.count(alter) >= 1) {
+      if (c != from[i] && words.erase(alter) >= 1) {
         siblings.push_back(alter);
       }
     }
@@ -42,24 +42,19 @@ vector<string> get_siblings(const string &from, const set<string> &words)
   return siblings;
 }
 
-vector<string> bfs(const string &from, const string &to, const set<string> &words)
+vector<string> bfs(const string &from, const string &to, set<string> &words)
 {
-  map<string, int> dist;
   map<string, string> parent;
   queue<string> queue;
-  dist[from] = 0;
   queue.push(from);
 
-  while (queue.size() > 0 && dist.count(to) == 0) {
+  while (queue.size() > 0 && parent.count(to) == 0) {
     string node = queue.front();
     vector<string> siblings = get_siblings(node, words);
     queue.pop();
     for(int i = 0; i < siblings.size(); i++) {
-      if (dist.count(siblings[i]) == 0) {
-        dist[siblings[i]] = dist[node] + 1;
-        parent[siblings[i]] = node;
-        queue.push(siblings[i]);
-      }
+      parent[siblings[i]] = node;
+      queue.push(siblings[i]);
     }
   }
 

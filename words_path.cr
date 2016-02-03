@@ -5,12 +5,6 @@ require "set"
 from, to = ARGV
 $words = Set.new(File.read_lines("/usr/share/dict/words").select {|w| w.size == from.size+1}.map(&.chomp).map(&.downcase))
 
-# (slower) iterate on words + measure & filter by changes
-# $siblings = Hash(String, Array(String)).new do |h, k|
-#   h[k] = words.select {|w| (k.bytes.zip(w.bytes).inject(0) {|c, chars| c += 1 if chars[0] != chars[1]; c } == 1) }
-# end
-
-# (faster) iterate on possible manipulation + test inclusing
 def siblings(from)
   out = [] of String
   ptr = Pointer.malloc(from.size) { |i| from[i].ord.to_u8 }

@@ -1,4 +1,4 @@
-all: words_path_c++ words_path_crystal words_path_rs Elixir.WordsPath.beam words_path_go
+all: words_path_c++ words_path_crystal words_path_rs Elixir.WordsPath.beam words_path_go words_path_mrb
 
 words_path_c++: words_path.cpp
 	clang++ -O3 words_path.cpp -o words_path_c++
@@ -25,18 +25,6 @@ clean:
 	rm -f words_path_c++ words_path_crystal words_path_rs Elixir.WordsPath.beam words_path_mrb.c words_path_mrb
 
 test: all
-	time -p ./words_path.rb jina pray
-	@echo "-----------------"
-	time -p ./words_path_crystal jina pray
-	@echo "-----------------"
-	time -p ./words_path_c++ jina pray
-	@echo "-----------------"
-	time -p ./words_path_rs jina pray
-	@echo "-----------------"
-	time -p ./words_path_go jina pray
-	@echo "-----------------"
-	time -p ./words_path.exs jina pray
-	# @echo "-----------------"
-	# time -p ./words_path_mrb
+	./benchmark.rb
 
 re: clean all

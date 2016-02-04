@@ -18,13 +18,13 @@ This runs all version against the same example (`jina pray`) to compare their sp
 
 Language | CPU time | Clock time | Comment
 ---------|----------|------------|-------------------------------------------
-Rust     |    16 ms |      20 ms | Best performance, not sure why yet ☺
+Rust 1.5 |    16 ms |      20 ms | Best performance, not sure why yet ☺
 Crystal  |    23 ms |      22 ms | Crystal is a Ruby-like statically compiled language, very promising.
 Go       |    29 ms |      32 ms | Like C++
 C++      |    30 ms |      32 ms |
-Ruby     |   146 ms |     170 ms | Interpreted, slower of course
-Elixir   |   640 ms |     650 ms | My code is probably pretty bad but I expected better.
-mruby    | 2,000 ms |   2,000 ms | mruby is quite slow here, not sure why.
+Ruby 2.3 |   146 ms |     170 ms | Interpreted, slower of course
+Elixir 1.2 |   640 ms |     650 ms | My code is probably pretty bad but I expected better.
+mruby 1.2 | 2,000 ms |   2,000 ms | mruby is quite slow here, not sure why.
 
 Here is the raw benchmark-ips output:
 

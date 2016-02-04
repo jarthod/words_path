@@ -1,8 +1,10 @@
 #!/usr/bin/env ruby
 
-
 from, to = ARGV
-$words = Set.new(File.new('/usr/share/dict/words').readlines.select {|w| w.length == from.length+1}.map(&:chomp).map(&:downcase))
+$words = {}
+File.new('/usr/share/dict/words').each do |line|
+  $words[line.chomp.downcase] = true if line.length == from.length+1
+end
 
 def siblings from
   Enumerator.new do |enum|
@@ -10,7 +12,7 @@ def siblings from
       w = from.dup
       ('a'..'z').each do |l|
         w[i] = l
-        enum.yield w.dup if $words.delete?(w)
+        enum.yield w.dup if $words.delete(w)
       end
     end
   end

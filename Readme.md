@@ -22,28 +22,27 @@ Rust 1.5   |    16 ms |      20 ms | Best performance, not sure why yet ☺
 Crystal    |    23 ms |      22 ms | Crystal is a Ruby-like statically compiled language, very promising.
 Go         |    29 ms |      32 ms | Like C++
 C++        |    30 ms |      32 ms |
-Ruby 2.3   |   146 ms |     170 ms | Interpreted, slower of course
+Ruby 2.3   |   132 ms |     160 ms | Interpreted, slower of course
 Elixir 1.2 |   640 ms |     650 ms | My code is probably pretty bad but I expected better.
-mruby 1.2  |   840 ms |     850 ms | mruby is quite slow here, not sure why.
+mruby 1.2  |   666 ms |     666 ms | mruby is quite slow here, not sure why.
 
 Here is the raw benchmark-ips output:
 
 ```
-                rust     50.450  (± 2.0%) i/s -    255.000
-             crystal     45.170  (± 2.2%) i/s -    228.000
-                  go     31.799  (± 0.0%) i/s -    159.000
-                 c++     32.130  (± 0.0%) i/s -    162.000
-                ruby      6.634  (± 0.0%) i/s -     34.000
-              elixir      1.532  (± 0.0%) i/s -      8.000
-               mruby      1.114  (± 0.0%) i/s -      6.000  in   5.391564s
+                rust     50.352  (± 2.0%) i/s -    255.000
+             crystal     44.992  (± 4.4%) i/s -    228.000
+                  go     31.963  (± 0.0%) i/s -    162.000
+                 c++     32.173  (± 3.1%) i/s -    162.000
+                ruby      7.131  (± 0.0%) i/s -     36.000
+              elixir      1.538  (± 0.0%) i/s -      8.000
+               mruby      1.451  (± 0.0%) i/s -      8.000  in   5.514237s
 
 Comparison:
                 rust:       50.4 i/s
-             crystal:       45.2 i/s - 1.12x slower
-                 c++:       32.1 i/s - 1.57x slower
-                  go:       31.8 i/s - 1.59x slower
-                ruby:        6.6 i/s - 7.61x slower
-              elixir:        1.5 i/s - 32.94x slower
-               mruby:        1.1 i/s - 45.27x slower
-
+             crystal:       45.0 i/s - 1.12x slower
+                 c++:       32.2 i/s - 1.57x slower
+                  go:       32.0 i/s - 1.58x slower
+                ruby:        7.1 i/s - 7.06x slower
+              elixir:        1.5 i/s - 32.75x slower
+               mruby:        1.5 i/s - 34.71x slower
 ```

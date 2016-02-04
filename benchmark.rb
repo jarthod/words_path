@@ -14,7 +14,7 @@ Benchmark.ips do |x|
   x.report("c++")  { `./words_path_c++ jina pray` }
   x.report("ruby")  { `./words_path.rb jina pray` }
   x.report("elixir")  { `elixir ./words_path.exs jina pray` }
-  x.report("mruby")  { `./words_path_mrb` }
+  x.report("mruby")  { `mruby-1.2.0/bin/mruby words_path.mrb jina pray` }
 
   x.compare!
 end

@@ -1,5 +1,4 @@
 #!/usr/bin/env ruby
-
 require 'set'
 
 from, to = ARGV

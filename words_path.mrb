@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
-from, to = "jina", "pray"
+
+from, to = ARGV
 $words = Set.new(File.new('/usr/share/dict/words').readlines.select {|w| w.length == from.length+1}.map(&:chomp).map(&:downcase))
 
 def siblings from

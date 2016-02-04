@@ -2,12 +2,16 @@
 
 Words path in a simple programming excercise consisting in writing a program able to find a path between two english words of the same length, changing only one letter a time and only using valid english words as intermediaries.
 
-Ex: `cat -> cot -> dot -> dog`
+Ex: `cat -> cot -> dot -> dog` or `jina -> dina -> dins -> bins -> bias -> bras -> bray -> pray`
 
 This repository holds a few versions of my solution to this problem I wrote in different languages (see below).
 
 You can compile and run them all by using: `make test`
-You'll need the `crystal`, `clang`, `rustc`, `elixirc` compilers and `ruby`.
+You'll need the `crystal`, `clang`, `rustc`, `elixirc` compilers, `ruby` and `mruby`. mruby will need to be compiled in the `mruby-1.2.0` folder with the following gems:
+```
+  conf.gem github: 'yui-knk/mruby-set'
+  conf.gem github: 'iij/mruby-io'
+```
 You'll also need the `benchmark-ips` ruby gem to run the test: `gem install benchmark-ips`
 
 This runs all version against the same example (`jina pray`) to compare their speed, they are all compiled in release mode with standard optimizations (see Makefile). Here are the results on my machine:
@@ -20,7 +24,7 @@ Go       |    29 ms |      32 ms | Like C++
 C++      |    30 ms |      32 ms |
 Ruby     |   146 ms |     170 ms | Interpreted, slower of course
 Elixir   |   640 ms |     650 ms | My code is probably pretty bad but I expected better.
-mruby    | 2,000 ms |   2,000 ms | Even compiled into binary, mruby is quite slow here, not mature enough I guess.
+mruby    | 2,000 ms |   2,000 ms | mruby is quite slow here, not sure why.
 
 Here is the raw benchmark-ips output:
 

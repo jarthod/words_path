@@ -26,6 +26,16 @@ Ruby 2.3   |   132 ms |     160 ms | Interpreted, slower of course
 Elixir 1.2 |   640 ms |     650 ms | My code is probably pretty bad but I expected better.
 mruby 1.2  |   666 ms |     666 ms | mruby is quite slow here, not sure why.
 
+And here is a more detailed benchmark about Ruby interpreters:
+
+ VM            |  bootup | file load | graph search |   total |
+---------------|---------|-----------|--------------|---------|
+ MRI 2.3.0     |   73 ms |     27 ms |        70 ms |  170 ms |
+ mruby 1.2     |    2 ms |    220 ms |       470 ms |  692 ms |
+ Rubinius 2.9  |  350 ms |    900 ms |       800 ms | 2050 ms |
+ JRuby 9.0.4.0 | 1750 ms |    280 ms |       320 ms | 2350 ms |
+ JRuby + Graal | 1380 ms |    140 ms |       180 ms | 1700 ms |
+
 Here is the raw benchmark-ips output:
 
 ```

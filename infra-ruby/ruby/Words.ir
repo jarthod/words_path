@@ -1,0 +1,59 @@
+## <>
+module Words
+  ## Fixnum -> Hash<String, Boolean>
+  def self.load_dict(size)
+    words = {}
+    File.readlines('/usr/share/dict/words').each do |line|
+      words[line.chomp.downcase] = true if line.length == size+1
+    end
+    words
+  end
+
+  ## String, Hash<String, Boolean> -> Array<String>
+  def self.siblings(from, words)
+    siblings = []
+    from.length.to_int32.times do |i|
+      w = from.to_j_bytes
+      97.upto(122) do |l|
+        w[i] = l.to_byte
+        word = String.from_j_bytes(w)
+        siblings.push word if words.delete(word)
+      end
+    end
+    siblings
+  end
+
+  ## String, String, Hash<String, Boolean> -> Array<String>
+  def self.bfs(from, to, words)
+    parent = {'' => ''}
+    queue = [from]
+
+    while !parent[to] && queue.size > 0
+      n = queue.shift
+      unless n.nil?
+        siblings(n, words).each do |child|
+          parent[child] = n
+          queue.push(child)
+        end
+      end
+    end
+
+    path = [to]
+    while parent[to]
+      path.unshift(parent[to])
+      par = parent[to]
+      to = par unless par.nil?
+    end
+    path
+  end
+
+	## String, String -> void
+	def self.path(from, to)
+    puts "InfraRuby words path: #{from} → #{to}"
+    a = Time.now
+    dict = load_dict(from.length)
+    b = Time.now
+		puts bfs(from, to, dict).join(' → ')
+    puts "load: #{b - a}; search: #{Time.now - b}"
+	end
+end

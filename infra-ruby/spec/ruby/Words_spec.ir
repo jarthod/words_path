@@ -1,0 +1,7 @@
+require "spec_helper"
+
+RSpec.describe "Words.message" do
+	it "should return message" do
+		# expect(Words.message).to eq("words-path")
+	end
+end

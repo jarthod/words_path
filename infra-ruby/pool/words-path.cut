@@ -1,0 +1,8 @@
+## <>
+##   .load_dict: Fixnum -> Hash<String, Boolean>
+##   .siblings: String, Hash<String, Boolean> -> Array<String>
+##   .bfs: String, String, Hash<String, Boolean> -> Array<String>
+##   .path: String, String -> void
+module Words
+end
+

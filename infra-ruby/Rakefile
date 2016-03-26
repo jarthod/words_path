@@ -1,0 +1,19 @@
+require "infraruby-task"
+
+USE_INFRARUBY_CORE = true
+
+loader = InfraRuby.task_loader
+loader.add_program("words-path-main")
+loader.load_tasks
+
+if USE_INFRARUBY_CORE
+	task "main" => "program:words-path-main:core:execute"
+	task "spec" => "spec:core:execute"
+else
+	task "main" => "program:words-path-main:interpret:ruby"
+	task "spec" => "spec:interpret:ruby"
+end
+
+task "run" => ["core:compile", "main"]
+
+task "default" => "spec"

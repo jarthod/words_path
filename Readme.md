@@ -35,6 +35,7 @@ And here is a more detailed benchmark about Ruby interpreters:
  Rubinius 2.9  |  350 ms |    900 ms |       800 ms | 2050 ms |
  JRuby 9.0.4.0 | 1750 ms |    280 ms |       320 ms | 2350 ms |
  JRuby + Graal | 1380 ms |    140 ms |       180 ms | 1700 ms |
+ InfraRuby 4.0 |  430 ms |    125 ms |        42 ms |  600 ms |
 
 Here is the raw benchmark-ips output:
 

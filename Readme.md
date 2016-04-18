@@ -21,7 +21,7 @@ Rust 1.5   |    16 ms |      20 ms | Best performance, not sure why yet ☺
 Crystal    |    23 ms |      22 ms | Crystal is a Ruby-like statically compiled language, very promising.
 Go         |    29 ms |      32 ms | Like C++
 C++        |    30 ms |      32 ms |
-Node,js 5  |   114 ms |     116 ms |
+Node.js 5  |   114 ms |     116 ms |
 Ruby 2.3   |   132 ms |     160 ms | Interpreted, slower of course
 Elixir 1.2 |   640 ms |     650 ms | My code is probably pretty bad but I expected better.
 mruby 1.2  |   666 ms |     666 ms | mruby is quite slow here, not sure why.

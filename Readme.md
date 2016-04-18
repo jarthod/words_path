@@ -7,7 +7,7 @@ Ex: `cat -> cot -> dot -> dog` or `jina -> dina -> dins -> bins -> bias -> bras 
 This repository holds a few versions of my solution to this problem I wrote in different languages (see below).
 
 You can compile and run them all by using: `make test`
-You'll need the `crystal`, `clang`, `rustc`, `elixirc` compilers, and the `node`, `ruby` and `mruby` interpreters. mruby will need to be compiled in the `mruby-1.2.0` folder without the `enable_debug` option and with the following gems:
+You'll need the `crystal`, `clang`, `rustc`, `elixirc` compilers, and the `node`, `ruby`, `python3` and `mruby` interpreters. mruby will need to be compiled in the `mruby-1.2.0` folder without the `enable_debug` option and with the following gems:
 ```
   conf.gem github: 'iij/mruby-io'
 ```
@@ -21,6 +21,7 @@ Rust 1.5   |    16 ms |      20 ms | Best performance, not sure why yet ☺
 Crystal    |    23 ms |      22 ms | Crystal is a Ruby-like statically compiled language, very promising.
 Go         |    29 ms |      32 ms | Like C++
 C++        |    30 ms |      32 ms |
+Python 3.4 |    90 ms |     100 ms |
 Node.js 5  |   114 ms |     116 ms |
 Ruby 2.3   |   132 ms |     160 ms | Interpreted, slower of course
 Elixir 1.2 |   640 ms |     650 ms | My code is probably pretty bad but I expected better.
@@ -40,22 +41,24 @@ And here is a more detailed benchmark about Ruby interpreters:
 Here is the raw benchmark-ips output:
 
 ```
-                rust     50.635  (± 2.0%) i/s -    256.000
-             crystal     45.121  (± 2.2%) i/s -    228.000
-                  go     31.266  (± 3.2%) i/s -    159.000
-                 c++     31.806  (± 3.1%) i/s -    159.000
-             node.js      8.611  (± 0.0%) i/s -     44.000
-                ruby      7.095  (± 0.0%) i/s -     36.000
-              elixir      1.503  (± 0.0%) i/s -      8.000  in   5.326484s
-               mruby      1.477  (± 0.0%) i/s -      8.000  in   5.417883s
+                rust     44.664  (± 6.7%) i/s -    224.000  in   5.040502s
+             crystal     36.651  (±10.9%) i/s -    183.000  in   5.056879s
+                  go     30.589  (± 6.5%) i/s -    154.000  in   5.050828s
+                 c++     29.137  (± 6.9%) i/s -    146.000  in   5.025849s
+              python     10.691  (± 9.4%) i/s -     54.000  in   5.070065s
+             node.js      8.132  (±12.3%) i/s -     41.000  in   5.063676s
+                ruby      6.835  (± 0.0%) i/s -     35.000  in   5.139321s
+              elixir      1.417  (± 0.0%) i/s -      8.000  in   5.701092s
+               mruby      1.431  (± 0.0%) i/s -      8.000  in   5.592228s
 
 Comparison:
-                rust:       50.6 i/s
-             crystal:       45.1 i/s - 1.12x slower
-                 c++:       31.8 i/s - 1.59x slower
-                  go:       31.3 i/s - 1.62x slower
-             node.js:        8.6 i/s - 5.88x slower
-                ruby:        7.1 i/s - 7.14x slower
-              elixir:        1.5 i/s - 33.69x slower
-               mruby:        1.5 i/s - 34.29x slower
+                rust:       44.7 i/s
+             crystal:       36.7 i/s - 1.22x slower
+                  go:       30.6 i/s - 1.46x slower
+                 c++:       29.1 i/s - 1.53x slower
+              python:       10.7 i/s - 4.18x slower
+             node.js:        8.1 i/s - 5.49x slower
+                ruby:        6.8 i/s - 6.53x slower
+               mruby:        1.4 i/s - 31.21x slower
+              elixir:        1.4 i/s - 31.53x slower
 ```

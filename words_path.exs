@@ -3,8 +3,12 @@
 defmodule WordsPath do
 
   def get_words from do
-    size = length(from)+1
-    File.stream!("/usr/share/dict/words") |> Stream.filter(fn(word) -> byte_size(word) == size end) |> Stream.map(fn(word) -> word |> String.rstrip(?\n) |> String.downcase |> String.to_char_list end) |> Enum.into(HashSet.new)
+    size = length(from)
+    File.read!("/usr/share/dict/words")
+    |> String.splitter("\n", trim: true)
+    |> Stream.filter(&byte_size(&1) == size)
+    |> Stream.map(&String.to_char_list(String.downcase(&1)))
+    |> Enum.into(HashSet.new)
   end
 
   def get_siblings from, words do
@@ -12,9 +16,9 @@ defmodule WordsPath do
       # <<left :: binary - size(i), _, right :: binary>> = from
       # left <> <<c>> <> right
       List.replace_at from, i, c
-    end |> Enum.filter(fn(word) -> Set.member?(words, word) end)
+    end
+    |> Enum.filter(&Set.member?(words, &1))
   end
-
 
   def get_path froms, to, words, visited do
     if Set.member?(froms, to) do

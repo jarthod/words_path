@@ -24,7 +24,7 @@ C++        |    30 ms |      32 ms |
 Python 3.4 |    90 ms |     100 ms |
 Node.js 5  |   114 ms |     116 ms |
 Ruby 2.3   |   132 ms |     160 ms | Interpreted, slower of course
-Elixir 1.2 |   640 ms |     650 ms | My code is probably pretty bad but I expected better.
+Elixir 1.2 |   570 ms |     570 ms | My code is probably pretty bad but I expected better.
 mruby 1.2  |   666 ms |     666 ms | mruby is quite slow here, not sure why.
 
 And here is a more detailed benchmark about Ruby interpreters:
